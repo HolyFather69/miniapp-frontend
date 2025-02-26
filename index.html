@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Clicker</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="balance">💰 0 ₽</h1>
+        <button id="clickButton" class="click-btn">👆 ТЫК</button>
+        <div id="level">⭐ Уровень: 1</div>
+        <div id="xp">📈 Опыт: 0/500</div>
+        <div class="buttons">
+            <button id="openCase" class="action-btn">🎁 Открыть кейс</button>
+            <button id="claimBonus" class="action-btn">💰 Бонус</button>
+            <button id="profile" class="action-btn">👤 Профиль</button>
+            <button id="lvltop" class="action-btn">🏆 Топ уровней</button>
+            <button id="casetop" class="action-btn">📦 Топ кейсов</button>
+            <button id="clanTop" class="action-btn">🏰 Топ кланов</button>
+            <button id="clan" class="action-btn">🏰 Кланы</button>
+            <button id="titles" class="action-btn">✨ Титулы</button>
+            <button id="admin" class="action-btn">⚡ Админ</button>
+        </div>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">×</span>
+                <div id="modal-body"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
