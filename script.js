@@ -37,7 +37,7 @@ function showModal(content) {
 closeModal.onclick = () => modal.style.display = 'none';
 window.onclick = (event) => { if (event.target == modal) modal.style.display = 'none'; };
 
-fetch(`/profile?username=${username}`).then(r => r.json()).then(data => {
+fetch(`https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/profile?username=${username}`).then(r => r.json()).then(data => {
     balance = data.balance;
     level = data.level;
     xp = data.xp;
@@ -46,13 +46,13 @@ fetch(`/profile?username=${username}`).then(r => r.json()).then(data => {
 });
 
 clickButton.addEventListener('click', () => {
-    fetch('/click', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/click', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username}) })
         .then(r => r.json())
         .then(data => { balance = data.balance; updateDisplay(); });
 });
 
 openCaseButton.addEventListener('click', () => {
-    fetch('/open_case', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/open_case', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username}) })
         .then(r => r.json())
         .then(data => {
             if (data.error) return alert(data.error);
@@ -69,7 +69,7 @@ openCaseButton.addEventListener('click', () => {
 });
 
 claimBonusButton.addEventListener('click', () => {
-    fetch('/claim_bonus', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.co/claim_bonus', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username}) })
         .then(r => r.json())
         .then(data => {
             if (data.error) return alert(data.error);
@@ -80,7 +80,7 @@ claimBonusButton.addEventListener('click', () => {
 });
 
 profileButton.addEventListener('click', () => {
-    fetch(`/profile?username=${username}`).then(r => r.json()).then(data => {
+    fetch(`https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/profile?username=${username}`).then(r => r.json()).then(data => {
         showModal(`👤 Профиль @${username} — легенда в деле!<br>` +
             `💰 Баланс: ${data.balance}₽ (ты богач или ещё нет?)<br>` +
             `📦 Кейсов открыто: ${data.cases_opened} (мастер вскрытия!)<br>` +
@@ -93,19 +93,19 @@ profileButton.addEventListener('click', () => {
 });
 
 lvltopButton.addEventListener('click', () => {
-    fetch('/lvltop').then(r => r.json()).then(data => showModal(data.top));
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/lvltop').then(r => r.json()).then(data => showModal(data.top));
 });
 
 casetopButton.addEventListener('click', () => {
-    fetch('/casetop').then(r => r.json()).then(data => showModal(data.top));
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/casetop').then(r => r.json()).then(data => showModal(data.top));
 });
 
 clanTopButton.addEventListener('click', () => {
-    fetch('/clan_top').then(r => r.json()).then(data => showModal(data.top));
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/clan_top').then(r => r.json()).then(data => showModal(data.top));
 });
 
 clanButton.addEventListener('click', () => {
-    fetch(`/clan?username=${username}`).then(r => r.json()).then(data => {
+    fetch(`https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/clan?username=${username}`).then(r => r.json()).then(data => {
         let content = `🏰 Добро пожаловать в мир кланов, воин! ⚔️<br>` +
             `Твой клан: ${data.clan ? data.clan : 'Нет клана'}<br>` +
             `Баланс: ${data.balance}₽<br><br>` +
@@ -146,7 +146,7 @@ clanButton.addEventListener('click', () => {
 });
 
 titlesButton.addEventListener('click', () => {
-    fetch('/all_titles').then(r => r.json()).then(data => showModal(data.titles));
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/all_titles').then(r => r.json()).then(data => showModal(data.titles));
 });
 
 adminButton.addEventListener('click', () => {
@@ -161,60 +161,60 @@ adminButton.addEventListener('click', () => {
 
 function createClan() {
     const clanName = document.getElementById('clanName').value;
-    fetch('/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'create', clan_name: clanName}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'create', clan_name: clanName}) })
         .then(r => r.json())
         .then(data => data.error ? alert(data.error) : showModal(data.message));
 }
 
 function joinClan() {
     const clanName = document.getElementById('clanName').value;
-    fetch('/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'join', clan_name: clanName}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'join', clan_name: clanName}) })
         .then(r => r.json())
         .then(data => data.error ? alert(data.error) : showModal(data.message));
 }
 
 function kickMember(clanName) {
     const target = document.getElementById('targetMember').value.replace('@', '');
-    fetch('/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'kick', clan_name: clanName, target}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'kick', clan_name: clanName, target}) })
         .then(r => r.json())
         .then(data => data.error ? alert(data.error) : showModal(data.message));
 }
 
 function inviteMember(clanName) {
     const target = document.getElementById('targetMember').value.replace('@', '');
-    fetch('/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'invite', clan_name: clanName, target}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'invite', clan_name: clanName, target}) })
         .then(r => r.json())
         .then(data => data.error ? alert(data.error) : showModal(data.message));
 }
 
 function acceptInvite(reqId) {
-    fetch('/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'accept_invite', req_id: reqId}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'accept_invite', req_id: reqId}) })
         .then(r => r.json())
         .then(data => data.error ? alert(data.error) : showModal(data.message));
 }
 
 function acceptRequest(reqId) {
-    fetch('/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'accept_request', req_id: reqId}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'accept_request', req_id: reqId}) })
         .then(r => r.json())
         .then(data => data.error ? alert(data.error) : showModal(data.message));
 }
 
 function declineRequest(reqId) {
-    fetch('/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'decline', req_id: reqId}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/clan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, action: 'decline', req_id: reqId}) })
         .then(r => r.json())
         .then(data => data.error ? alert(data.error) : showModal(data.message));
 }
 
 function setSuperuser() {
     const target = document.getElementById('targetUser').value.replace('@', '');
-    fetch('/superuser', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, target}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/superuser', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, target}) })
         .then(r => r.json())
         .then(data => data.error ? alert(data.error) : showModal(data.message));
 }
 
 function delSuperuser() {
     const target = document.getElementById('targetUser').value.replace('@', '');
-    fetch('/delsuperuser', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, target}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/delsuperuser', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, target}) })
         .then(r => r.json())
         .then(data => data.error ? alert(data.error) : showModal(data.message));
 }
@@ -222,15 +222,15 @@ function delSuperuser() {
 function setBalance() {
     const target = document.getElementById('targetUser').value.replace('@', '');
     const amount = parseInt(document.getElementById('amount').value);
-    fetch('/setbalance', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, target, amount}) })
+    fetch('https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/setbalance', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username, target, amount}) })
         .then(r => r.json())
         .then(data => data.error ? alert(data.error) : showModal(data.message));
 }
 
 function is_superuser() {
-    return fetch(`/profile?username=${username}`).then(r => r.json()).then(data => data.superuser);
+    return fetch(`https://f28fe313-846a-48b6-b502-34a6e9730f5c-00-w79l6p85vwsg.janeway.repl.dev/profile?username=${username}`).then(r => r.json()).then(data => data.superuser);
 }
 
 function get_level_xp(level) {
     return Math.floor(500 * level * (1 + level ** 1.5 / 100));
-}
+                }
